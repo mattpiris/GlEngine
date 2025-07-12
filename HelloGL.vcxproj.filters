@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext">
+      <UniqueIdentifier>{7670880B-E279-887C-6BF5-9E7CD7FD937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl">
+      <UniqueIdentifier>{4A5104A3-3609-46F0-9F10-1F4C8BE7E0E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glew">
+      <UniqueIdentifier>{288389C7-940E-F78B-9D1F-7A80092A538C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glew\include">
+      <UniqueIdentifier>{9B525B1C-078A-A3B3-1094-07D77C4ACAAC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glew\include\GL">
+      <UniqueIdentifier>{1DE2C7AF-09F2-7380-72AB-D89E5EDA6219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glfw">
+      <UniqueIdentifier>{498389C7-B50E-F78B-BE1F-7A802A2A538C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glfw\include">
+      <UniqueIdentifier>{BCE36520-281B-AEB7-3125-12DB9DDBD4B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glfw\include\GLFW">
+      <UniqueIdentifier>{7B549064-670F-8010-10C7-F85AFC60CAA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glm">
+      <UniqueIdentifier>{99701B44-853E-0F4A-6ED2-7F705A3FEBAE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\opengl\glm\simd">
+      <UniqueIdentifier>{95143AB7-0176-17C5-8AE3-5D77F6434E84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{169C8510-82B0-ADC1-4B32-5121B705AAF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\gameObj">
+      <UniqueIdentifier>{5A6C09E0-C62C-8516-8F67-CE93FBE6C9F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\log">
+      <UniqueIdentifier>{07579DD3-73C1-514A-BCFF-02F028A92F9F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\Game.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glew\include\GL\eglew.h">
+      <Filter>ext\opengl\glew\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glew\include\GL\glew.h">
+      <Filter>ext\opengl\glew\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glew\include\GL\glxew.h">
+      <Filter>ext\opengl\glew\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glew\include\GL\wglew.h">
+      <Filter>ext\opengl\glew\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glfw\include\GLFW\glfw3.h">
+      <Filter>ext\opengl\glfw\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glfw\include\GLFW\glfw3native.h">
+      <Filter>ext\opengl\glfw\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\common.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\exponential.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\geometric.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\integer.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\matrix.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\neon.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\packing.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\platform.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\trigonometric.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\opengl\glm\simd\vector_relational.h">
+      <Filter>ext\opengl\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Camera.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Shader.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\gameObj\Cube.h">
+      <Filter>utils\gameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\log\Log.h">
+      <Filter>utils\log</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="core\Game.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\opengl\glm\glm.cppm">
+      <Filter>ext\opengl\glm</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="utils\Camera.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Shader.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\gameObj\Cube.cpp">
+      <Filter>utils\gameObj</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
