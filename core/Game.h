@@ -12,6 +12,11 @@ public:
 	~Game();
 	static GLFWwindow* init_and_createWindow(unsigned int width, unsigned int height, bool fullscreen = false);
 	GLFWwindow* getWindow();
+
+	// processes all the user inputs. 
+	// updates the delta time of the game, and if the user presses the esc key the 
+	// window terminates. 
+	// it automatically handles the wasd keys for the camera
 	static void processInputs();
 	// creates and retrieves the newly created camera
 	// camera pointer lifetime is managed internally

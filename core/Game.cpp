@@ -72,14 +72,17 @@ void Game::processInputs() {
     if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(m_window, true);
 
-    if (glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
-        m_camera->ProcessKeyboard(FORWARD, deltaTime());
-    if (glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
-        m_camera->ProcessKeyboard(BACKWARD, deltaTime());
-    if (glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS)
-        m_camera->ProcessKeyboard(LEFT, deltaTime());
-    if (glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
-        m_camera->ProcessKeyboard(RIGHT, deltaTime());
+    // camera input stuff
+    if (m_camera) {
+        if (glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(FORWARD, deltaTime());
+        if (glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(BACKWARD, deltaTime());
+        if (glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(LEFT, deltaTime());
+        if (glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(RIGHT, deltaTime());
+    }
 }
 
 Camera* Game::createCamera(glm::vec3 cameraPos) {
@@ -102,6 +105,8 @@ void Game::callback_window_resize(GLFWwindow* win, int width, int height) {
 }
 
 void Game::callback_mouse_input(GLFWwindow* win, double xpos, double ypos) {
+    if (!m_camera) return;
+    
     float xposOut = static_cast<float>(xpos);
     float yposOut = static_cast<float>(ypos);
 
