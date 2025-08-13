@@ -4,6 +4,9 @@
     <Filter Include="core">
       <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\rendering">
+      <UniqueIdentifier>{3B63E6A1-2731-DAA7-10C5-4ACEFC31B60C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ext">
       <UniqueIdentifier>{7670880B-E279-887C-6BF5-9E7CD7FD937C}</UniqueIdentifier>
     </Filter>
@@ -34,6 +37,9 @@
     <Filter Include="ext\opengl\glm\simd">
       <UniqueIdentifier>{95143AB7-0176-17C5-8AE3-5D77F6434E84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ext\stb">
+      <UniqueIdentifier>{CE79B382-3A59-321E-4371-BDF4AFCF987F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{169C8510-82B0-ADC1-4B32-5121B705AAF2}</UniqueIdentifier>
     </Filter>
@@ -47,6 +53,18 @@
   <ItemGroup>
     <ClInclude Include="core\Game.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\rendering\IEmissionShape.h">
+      <Filter>core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="core\rendering\Particle.h">
+      <Filter>core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="core\rendering\ParticleEmitter.h">
+      <Filter>core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="core\rendering\RectangleEmissionShape.h">
+      <Filter>core\rendering</Filter>
     </ClInclude>
     <ClInclude Include="ext\opengl\glew\include\GL\eglew.h">
       <Filter>ext\opengl\glew\include\GL</Filter>
@@ -96,6 +114,9 @@
     <ClInclude Include="ext\opengl\glm\simd\vector_relational.h">
       <Filter>ext\opengl\glm\simd</Filter>
     </ClInclude>
+    <ClInclude Include="ext\stb\stb_perlin.h">
+      <Filter>ext\stb</Filter>
+    </ClInclude>
     <ClInclude Include="utils\Camera.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -108,14 +129,18 @@
     <ClInclude Include="utils\log\Log.h">
       <Filter>utils\log</Filter>
     </ClInclude>
-    <ClInclude Include="core\rendering\Particle.h" />
-    <ClInclude Include="core\rendering\ParticleEmitter.h" />
-    <ClInclude Include="core\rendering\IEmissionShape.h" />
-    <ClInclude Include="core\rendering\RectangleEmissionShape.h" />
+    <ClInclude Include="terrain\Chunk.h" />
+    <ClInclude Include="terrain\mc_lookupTable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Game.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\rendering\ParticleEmitter.cpp">
+      <Filter>core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="core\rendering\RectangleEmissionShape.cpp">
+      <Filter>core\rendering</Filter>
     </ClCompile>
     <ClCompile Include="ext\opengl\glm\glm.cppm">
       <Filter>ext\opengl\glm</Filter>
@@ -130,16 +155,10 @@
     <ClCompile Include="utils\gameObj\Cube.cpp">
       <Filter>utils\gameObj</Filter>
     </ClCompile>
-    <ClCompile Include="core\rendering\ParticleEmitter.cpp" />
-    <ClCompile Include="core\rendering\RectangleEmissionShape.cpp" />
+    <ClCompile Include="terrain\Chunk.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="DEVLOG.md" />
-    <None Include="utils\shaders\VertexShader.vert" />
-    <None Include="utils\shaders\FragmentShader.frag" />
-    <None Include="utils\shaders\ParticleVert.vert" />
-    <None Include="utils\shaders\ParticleFrag.frag" />
-    <None Include="utils\shaders\SingleParticle.vert" />
+    <None Include="utils\shaders\TerrainVert.vert" />
+    <None Include="utils\shaders\TerrainFrag.frag" />
   </ItemGroup>
 </Project>

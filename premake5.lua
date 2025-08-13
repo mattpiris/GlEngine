@@ -20,7 +20,8 @@ project "HelloGL"
    includedirs {
        "ext/opengl/glew/include",
        "ext/opengl/glfw/include",
-       "ext/opengl/"
+       "ext/opengl/",
+       "ext/stb"
    }
 
    libdirs {
@@ -34,7 +35,8 @@ project "HelloGL"
        "glfw3"
    }
 
-   defines { "GLEW_STATIC" }
+   defines { "GLEW_STATIC", 
+   "STB_PERLIN_IMPLEMENTATION"}
 
    filter "configurations:Debug"
       defines { "DEBUG" }

@@ -1,5 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <iostream>
 #include <memory>
@@ -9,6 +11,8 @@
 #include "core/rendering/ParticleEmitter.h"
 #include "core/rendering/RectangleEmissionShape.h"
 
+#include "terrain/Chunk.h"
+
 constexpr auto WIN_WIDTH = 1920;
 constexpr auto WIN_HEIGHT = 1080;
 
@@ -16,6 +20,7 @@ glm::vec3 cubePos(-10.0f, 0.0f, 1.0f);
 glm::vec3 ambientColor(1.0f, 0.9f, 0.81f);
 glm::vec3 emitterPos(0.0f, 0.0f, 0.0f);
 glm::vec3 particleColor(1.0f, 0.0f, 1.0f);
+glm::vec4 emitterColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 int main()
 {
@@ -31,8 +36,12 @@ int main()
     emitter.setEmissionShape(std::move(emissionShape));
 
     Cube cube(cubePos, &shader);
-    Cube emits(emitterPos, &shader);
+    Cube emits(emitterPos, &shader, 1.0f, emitterColor);
 
+    Chunk chunk(16, 1.0f);
+    Shader terrainShader("utils/shaders/TerrainVert.vert", "utils/shaders/TerrainFrag.frag");
+
+    glEnable(GL_DEPTH_TEST);
     while(!glfwWindowShouldClose(win)) {
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -41,13 +50,14 @@ int main()
         glm::mat4 view = cam->GetViewMatrix();
 
         shader.use();
-        shader.setVec3("ambientColor", ambientColor);
 
         cube.draw(projection, view);
         emits.draw(projection, view);
 
         emitter.update(game.deltaTime());
         emitter.render(particleShader, projection, view);
+        
+        chunk.render(terrainShader, projection, view);
 
         glfwPollEvents();
         glfwSwapBuffers(win);

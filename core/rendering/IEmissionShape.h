@@ -1,8 +1,8 @@
 // get a random point inside the shape
 // 
 #pragma once
-#include <glm.hpp>
-#include <gtc/random.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/random.hpp>
 
 class IEmissionShape
 {

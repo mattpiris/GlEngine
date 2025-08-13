@@ -1,9 +1,11 @@
 #include "Cube.h"
-#include <gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "../log/Log.h"
-Cube::Cube(glm::vec3 cubePos, Shader* shader)
+Cube::Cube(glm::vec3 cubePos, Shader* shader, float size, glm::vec4 color)
     :m_position(cubePos),
+    m_size(size),
+    m_color(color),
     m_model(glm::mat4(1.0f)),
     m_shader(shader),
     m_vao(0),
@@ -71,6 +73,8 @@ void Cube::draw(glm::mat4& projection, glm::mat4& view) {
     m_shader->setMat4("projection", projection);
     m_shader->setMat4("view", view);
     m_shader->setMat4("model", m_model);
+    m_shader->setVec4("color", m_color);
+    m_shader->setFloat("size", m_size);
 
     glBindVertexArray(m_vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
