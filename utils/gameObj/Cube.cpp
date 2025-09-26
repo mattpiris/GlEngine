@@ -1,15 +1,10 @@
 #include "Cube.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../log/Log.h"
+#include "../stuff/Log.h"
 Cube::Cube(glm::vec3 cubePos, Shader* shader, float size, glm::vec4 color)
-    :m_position(cubePos),
-    m_size(size),
-    m_color(color),
-    m_model(glm::mat4(1.0f)),
-    m_shader(shader),
-    m_vao(0),
-    m_vbo(0)
+    :
+    IGameObject(cubePos, shader, size, color), m_vao(0), m_vbo(0)
 {
     m_vertexData = {
         // vertices             // normals

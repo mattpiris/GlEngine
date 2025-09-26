@@ -1,0 +1,19 @@
+#version 430 core
+
+
+struct TerrainVertex {
+	vec3 position;
+	vec3 normal;
+};
+
+layout(std430, binding = 0) buffer vertexBuffer {
+	TerrainVertex vertex[];
+};
+
+layout(binding = 2) uniform atomic_uint counter;
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
+void main()
+{
+	uint id = atomicCounterIncrement(counter);
+	vertex[id].position = vec3(id, id, id);
+}

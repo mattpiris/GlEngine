@@ -10,7 +10,7 @@ out vec4 FragColor;
 void main() {
 	vec3 ambient = lightColor * vec3(aColor);
 	
-	vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0)); // Directional light
+	vec3 lightDir = normalize(vec3(1.0, -1.0, 1.0)); // Directional light
     float diff = max(dot(normalize(normal), lightDir), 0.0);
     vec3 diffuse = diff * lightColor * vec3(aColor);
 

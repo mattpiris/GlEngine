@@ -21,6 +21,8 @@ public:
 	// creates and retrieves the newly created camera
 	// camera pointer lifetime is managed internally
 	static Camera* createCamera(glm::vec3 cameraPos);
+	void showFPS();
+
 	// retrieves deltaTime
 	static float deltaTime();
 private:
@@ -35,8 +37,10 @@ private:
 	static float m_elapsedTime;
 
 	static bool m_firstMouse;
-	static float m_lastx;
-	static float m_lasty;
+	static double m_lastx;
+	static double m_lasty;
+
+	static bool m_freeCursor;
 
 	static void updateDeltaTime();
 
