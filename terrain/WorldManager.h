@@ -20,6 +20,13 @@ public:
 	// the position is the chunk position, the direction is the direction the world manager should look at
 	unsigned int getNearChunkLodState(glm::vec2 position, glm::ivec2 direction);
 	void TerrainImGui();
+
+	// retrieves the whole map for now, occlusion tests later
+	std::vector<std::shared_ptr<Chunk>> const getVisibleChunks() { return m_worldMap; }
+
+	// retrieves the nearest terrain intersection with the terrain collision mesh
+	// given the ray passed as parameter
+	std::optional<Physics::RayCastHit> getNearestTerrainIntersection(Physics::RayCast& ray);
 private:
 	// later all the information about the chunks could be stored here
 	// std::vector<Chunk> m_worldMap;

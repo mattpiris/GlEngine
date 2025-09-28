@@ -10,7 +10,7 @@
 class IGameObject
 {
 public:
-	IGameObject(glm::vec3 position, Shader* shader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f))
+	IGameObject(glm::vec3 position, Shader& shader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f))
 		:m_position(position), m_shader(shader), m_size(size), m_color(color), m_model(glm::mat4(1.0f)) {}
 	// this function updates the projection and view matrix in the shaders,
 	// therefore all the other uniform variables 
@@ -21,8 +21,10 @@ public:
 	virtual void rotate(float angle, glm::vec3& axis) {
 		m_model = glm::rotate(m_model, glm::radians(angle), axis);
 	}
+
+	virtual void setPosition(glm::vec3 newPosition) { m_position = newPosition; }
 protected:
-	Shader* m_shader;
+	Shader m_shader;
 	glm::vec3 m_position;
 	glm::mat4 m_model;
 	glm::vec4 m_color;

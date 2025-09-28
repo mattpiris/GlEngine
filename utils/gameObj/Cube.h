@@ -12,7 +12,7 @@
 class Cube : public IGameObject
 {
 public:
-	Cube(glm::vec3 cubePos, Shader* cubeShader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f));
+	Cube(glm::vec3 cubePos, Shader& cubeShader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f));
 	// this function updates the projection and view matrix in the shaders,
 	// therefore all the other uniform variables 
 	// need to be updated before calling this function

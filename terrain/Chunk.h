@@ -5,6 +5,8 @@
 #include "../utils/gameObj/Cube.h"
 #include "../utils/Shader.h"
 
+#include "../physics/CollisionMesh.h"
+#include "../physics/AxisAlignedBoundingBox.h"
 class WorldManager;
 
 struct TerrainVertex
@@ -28,21 +30,24 @@ public:
 	// returns the world position of the chunk
 	glm::vec2 getChunkPosition() const						{ return m_position; }
 	std::unordered_map<int, int> getSurfaceBuffer()  const	{ return m_surfaceBuffer; }
- 	
+	
 	unsigned int getGenerationTicket() const { return m_generationTicket; }
 	int getChunkSize() const { return m_size; }
 	float getCellSize() const { return m_cellSize; }
 
+	// physics stuff
+	Physics::CollisionMesh getCollisionMesh() const { return m_collisionMesh; }
+	Physics::AABB getAABB() const;
 private:
 	WorldManager* m_manager;
 	unsigned int m_generationTicket;
-	int m_size;
-	int m_height;
+	int m_size;		// not in world scale
+	int m_height;	// not in world scale
 	float m_cellSize;
-	glm::vec2 m_position;
+	glm::vec2 m_position; // already in world coordinates from world manager
 
 	// stores the information about if an edge is solid or not
-	std::vector<int> m_vertexVector; /// should be int, changed for test purposes
+	std::vector<int> m_vertexVector;
 	std::vector<float> m_densityVector;
 	
 	// given a vec2 in unit cubes local to the chunk, it retrieves the y coordinate
@@ -51,6 +56,9 @@ private:
 
 	std::vector<float> m_positionBuffer; // for positionvbo, contains all the data position for the triangles
 	std::vector<float> m_normalBuffer;
+
+	std::vector<Physics::Triangle> m_temporaryMesh;
+	Physics::CollisionMesh m_collisionMesh;
 
 	Shader m_shader;
 

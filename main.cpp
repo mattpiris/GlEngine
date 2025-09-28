@@ -10,7 +10,7 @@
 #include <iostream>
 #include <memory>
 
-#include "core/Game.h"
+#include "core/Engine.h"
 #include "utils/gameObj/Cube.h"
 #include "utils/gameObj/Plane.h"
 
@@ -21,12 +21,13 @@
 #include "terrain/ResourcesManager.h"
 #include "terrain/WorldManager.h"
 
+#include "scenes/TestScene.h"
+
 constexpr auto WIN_WIDTH = 1920;
 constexpr auto WIN_HEIGHT = 1080;
 constexpr auto NEAR_PLANE = 0.1f;
 constexpr auto FAR_PLANE = 300.0f;
 
-glm::vec3 cubePos(-10.0f, 0.0f, 1.0f);
 glm::vec3 planePos(-1.0f, -0.5f, 0.0f);
 float planeSize = 10.0f;
 
@@ -37,20 +38,16 @@ glm::vec3 particleColor(1.0f, 0.0f, 1.0f);
 glm::vec4 emitterColor(1.0f, 0.0f, 1.0f, 1.0f);
 glm::vec4 planeColor(0.45, 0.33, 0.20, 1.0);
 
-// the chunk dimensions should be multiple of 2 for internal reasons
-unsigned int chunkSize = 16; // dont put this higher than 32, vs crashes lolslsls
-unsigned int n_chunks = 20;
-unsigned int n_worldHeight = 64; // world height
+int main() {
+    Engine::init_and_createWindow(WIN_WIDTH, WIN_HEIGHT);
+    Engine::enableDepthTest(true);
+    auto startingScene = std::make_shared<TestScene>();
+    Engine::addScene(0, startingScene);
+    Engine::changeScene(0);
+    Engine::run();
 
-unsigned int fieldSize_x = 40;
-unsigned int fieldSize_z = 40;
-
-int main()
-{
-    Game game;
-    GLFWwindow* win = game.init_and_createWindow(WIN_WIDTH, WIN_HEIGHT);
-    glEnable(GL_DEPTH_TEST);
-    Camera* cam = game.createCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+    /*
+    auto cam = game.createCamera(glm::vec3(0.0f, 0.0f, 0.0f));
 
     glm::vec3 grassfieldPos(planePos.x - (fieldSize_x / 2), planePos.y, planePos.z - (fieldSize_z / 2));
     Shader shader("utils/shaders/VertexShader.vert", "utils/shaders/FragmentShader.frag");
@@ -73,7 +70,7 @@ int main()
     ResourcesManager::getInstance().loadModel(AssetID::TWISTED_TREE3, "assets/models/TwistedTree_3.obj");
     ResourcesManager::getInstance().loadModel(AssetID::TWISTED_TREE4, "assets/models/TwistedTree_4.obj");
     ResourcesManager::getInstance().loadModel(AssetID::TWISTED_TREE5, "assets/models/TwistedTree_5.obj");
-    */
+
     Model grassModel("assets/models/Grass_Wispy_Tall.obj");
     Shader instancedShader("utils/shaders/InstancedModelVert.vert", "utils/shaders/BushModelFrag.frag");
 
@@ -86,8 +83,11 @@ int main()
     // Model assetModel("assets/models/Grass_Wispy_Tall.obj");
     // Model model("assets/models/CommonTree_1.obj");
     Shader modelShader("utils/shaders/BushModelVert.vert", "utils/shaders/BushModelFrag.frag");
+    */
 
+    /*
     while(!glfwWindowShouldClose(win)) {
+        /*
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         game.processInputs();
@@ -127,10 +127,12 @@ int main()
 
         glfwPollEvents();
         glfwSwapBuffers(win);
+        
     }
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+    */
     return 0;
 }

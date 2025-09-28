@@ -78,7 +78,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\Game.h">
+    <ClInclude Include="core\Engine.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\rendering\IEmissionShape.h">
@@ -441,9 +441,14 @@
     <ClInclude Include="ext\stb\FastNoise.h" />
     <ClInclude Include="utils\ComputeShader.h" />
     <ClInclude Include="terrain\mc_trasnLookupTable.h" />
+    <ClInclude Include="physics\RayCast.h" />
+    <ClInclude Include="physics\CollisionMesh.h" />
+    <ClInclude Include="core\Scene.h" />
+    <ClInclude Include="scenes\TestScene.h" />
+    <ClInclude Include="physics\AxisAlignedBoundingBox.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\Game.cpp">
+    <ClCompile Include="core\Engine.cpp">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\rendering\Mesh.cpp">
@@ -509,6 +514,10 @@
     <ClCompile Include="utils\stuff\ComputeShaderEx.cpp" />
     <ClCompile Include="core\rendering\BatchRenderer.cpp" />
     <ClCompile Include="utils\ComputeShader.cpp" />
+    <ClCompile Include="physics\RayCast.cpp" />
+    <ClCompile Include="physics\CollisionMesh.cpp" />
+    <ClCompile Include="scenes\TestScene.cpp" />
+    <ClCompile Include="physics\AxisAlignedBoundingBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\shaders\BushModelFrag.frag" />
@@ -522,5 +531,7 @@
     <None Include="utils\computeShaders\ChunkCompute.comp" />
     <None Include="utils\computeShaders\MarchingCubes.comp" />
     <None Include="utils\computeShaders\TestCompute.comp" />
+    <None Include="utils\shaders\rayCast.frag" />
+    <None Include="utils\shaders\rayCastVert.vert" />
   </ItemGroup>
 </Project>

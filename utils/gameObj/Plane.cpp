@@ -1,7 +1,7 @@
 #include "Plane.h"
 #include "../stuff/Log.h"
 
-Plane::Plane(glm::vec3 position, Shader* shader, float size, glm::vec4 color)
+Plane::Plane(glm::vec3 position, Shader& shader, float size, glm::vec4 color)
 	:IGameObject(position, shader, size, color), m_vao(0), m_vbo(0)
 {
     m_vertexData =
@@ -20,25 +20,19 @@ Plane::Plane(glm::vec3 position, Shader* shader, float size, glm::vec4 color)
 	setGlContext();
 }
 
-void Plane::draw(glm::mat4& projection, glm::mat4& view)
-{
-    if (!m_shader) {
-        LOG("CUBE::DRAW::ERROR: attached shader doesnt exist");
-        return;
-    }
-
-    m_shader->use();
+void Plane::draw(glm::mat4& projection, glm::mat4& view) {
+    m_shader.use();
 
     // glm::mat4 model = glm::mat4(1.0f);
 
     m_model = glm::translate(m_model, m_position);
     
 
-    m_shader->setMat4("projection", projection);
-    m_shader->setMat4("view", view);
-    m_shader->setMat4("model", m_model);
-    m_shader->setVec4("color", m_color);
-    m_shader->setFloat("size", m_size);
+    m_shader.setMat4("projection", projection);
+    m_shader.setMat4("view", view);
+    m_shader.setMat4("model", m_model);
+    m_shader.setVec4("color", m_color);
+    m_shader.setFloat("size", m_size);
 
     glBindVertexArray(m_vao);
     glDrawArrays(GL_TRIANGLES, 0, 6);

@@ -12,6 +12,8 @@
 #include "mc_trasnLookupTable.h"
 #include "TerrainUtils.h"
 
+#include "../physics/CollisionMesh.h"
+
 #include <algorithm>
 
 Chunk::Chunk(WorldManager* manager, int chunkSize, int chunkHeight, float cellSize, glm::vec2 pos, unsigned int generationTicket)
@@ -106,6 +108,9 @@ void Chunk::fillBuffers()
 			}	
 		}
 	}
+
+	m_collisionMesh = Physics::CollisionMesh(m_temporaryMesh);
+	m_temporaryMesh.clear();
 }
 
 void Chunk::runMarchingCubes(glm::ivec3 position, int resolution)
@@ -114,6 +119,7 @@ void Chunk::runMarchingCubes(glm::ivec3 position, int resolution)
 	int index = getGridCellIndex(pos, resolution);
 	//std::vector<int> m_edgeIndexes = mc::lookUpTable[index];
 	int* m_edgeIndexes = mc::lookUpTable[index].data();
+
 	for (int i = 0; i < 16; i += 3) // at most 15 vertices per cube
 	{
 		if (m_edgeIndexes[i] == -1) break;
@@ -169,6 +175,9 @@ void Chunk::runMarchingCubes(glm::ivec3 position, int resolution)
 			m_normalBuffer.push_back(normal.y);
 			m_normalBuffer.push_back(normal.z);
 		}
+
+		Physics::Triangle triangle(triTable[0], triTable[1], triTable[2]);
+		m_temporaryMesh.push_back(triangle);
 	}
 }
 
@@ -293,6 +302,12 @@ void Chunk::render(Shader& terrainShader, glm::mat4& projection, glm::mat4& view
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_TRIANGLES, 0, m_positionBuffer.size() / 3);
 	glBindVertexArray(0);
+}
+
+Physics::AABB Chunk::getAABB() const {
+	glm::vec3 min(m_position.x, 0.0f, m_position.y);
+	glm::vec3 max = min + glm::vec3(m_size, m_height, m_size) * m_cellSize;
+	return Physics::AABB(min, max);
 }
 
 int Chunk::getGridCellIndex(glm::ivec3 position, int resolution) {

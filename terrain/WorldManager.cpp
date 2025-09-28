@@ -131,3 +131,24 @@ BatchRenderer WorldManager::createInstances(ResourceObjectInfo& info) {
 
     return BatchRenderer(info.model, positions);
 }
+
+
+std::optional<Physics::RayCastHit> WorldManager::getNearestTerrainIntersection(Physics::RayCast& ray) {
+    std::optional<Physics::RayCastHit> bestHit;
+    float t_min = ray.maxDist;
+    
+    for (auto& chunk : m_worldMap) {
+        // filters all the chunks that dont overlap with the ray in an early stage
+        Physics::AABB aabb = chunk->getAABB();
+        if (!Physics::ray_intersects_AABB(ray, aabb)) continue;
+
+        Physics::CollisionMesh mesh = chunk->getCollisionMesh();
+        auto hit = Physics::ray_intersects_mesh(ray, mesh);
+        if (hit && hit->t < t_min) {
+            bestHit = hit;
+            t_min = hit->t;
+        }
+    }
+    
+    return bestHit;
+}

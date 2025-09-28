@@ -10,7 +10,7 @@
 class Plane : public IGameObject
 {
 public:
-	Plane(glm::vec3 position, Shader* shader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f));
+	Plane(glm::vec3 position, Shader& shader, float size = 1.0f, glm::vec4 color = glm::vec4(1.0f));
 	virtual void draw(glm::mat4& projection, glm::mat4& view) override;
 private:
 	std::vector<float> m_vertexData;
