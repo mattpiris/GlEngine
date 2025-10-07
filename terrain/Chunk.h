@@ -33,12 +33,13 @@ public:
 	
 	unsigned int getGenerationTicket() const { return m_generationTicket; }
 	int getChunkSize() const { return m_size; }
+	int getChunkHeight() const { return m_height; }
 	float getCellSize() const { return m_cellSize; }
-
 	// physics stuff
 	Physics::CollisionMesh getCollisionMesh() const { return m_collisionMesh; }
 	Physics::AABB getAABB() const;
 private:
+	friend class WorldManager;
 	WorldManager* m_manager;
 	unsigned int m_generationTicket;
 	int m_size;		// not in world scale
@@ -70,6 +71,7 @@ private:
 
 	int getIndex(int x, int y, int z) const;
 	void createMesh();
+	void regenerateMesh();
 	// this method fills the vertex vector
 	void fillSolidMap();
 	// fills the positionBuffer with all the triangles position data
@@ -89,4 +91,9 @@ private:
 	// the resolution parameter is the resolution of the cubes in the grid, must be a multiple of 2
 	// this algorithm solves the issue of the stitching when changing the lod
 	void runTransvoxelCubes(glm::ivec3, int resolution);
+
+
+	// this method should be called by world manager to modify the terrain
+	std::vector<float>& getDensityData() { return m_densityVector; }
+	void setDensityData(std::vector<float> newData) { m_densityVector = newData; }
 };

@@ -1,6 +1,5 @@
-#include "CollisionMesh.h"
-#include <algorithm>
-#include "../utils/stuff/Log.h"
+#include "IntersectionTests.h"
+
 std::optional<Physics::RayCastHit> Physics::ray_intersects_triangle(RayCast& ray, Triangle triangle) {
 	constexpr float epsilon = 1e-5f;
 	glm::vec3 edge1 = triangle.v1 - triangle.v0;
@@ -47,4 +46,34 @@ std::optional<Physics::RayCastHit> Physics::ray_intersects_mesh(RayCast& ray, Co
 		}
 	}
 	return bestTarget;
+}
+
+bool Physics::ray_intersects_AABB(RayCast& ray, AABB& aabb) {
+	float tNear = -FLT_MAX;
+	float tFar = FLT_MAX;
+
+	for (int i = 0; i < 3; i++) {
+		// min and max distance along all the axis of the aabb
+		float t1 = (aabb.minDist[i] - ray.origin[i]) / ray.direction[i];
+		float t2 = (aabb.maxDist[i] - ray.origin[i]) / ray.direction[i];
+
+		if (t1 > t2) std::swap(t1, t2);
+
+		tNear = std::max(tNear, t1);
+		tFar = std::min(tFar, t2);
+
+		if (tNear > tFar) return false;
+		if (tFar < 0) return false;
+	}
+
+	return true;
+}
+
+bool Physics::sphere_intersects_AABB(SphereCollider& sphere, AABB& aabb) {
+	float distance = 0.0f;
+	for (int i = 0; i < 3; i++) {
+		if (sphere.center[i] < aabb.minDist[i]) distance += (aabb.minDist[i] - sphere.center[i]) * (aabb.minDist[i] - sphere.center[i]);
+		if (sphere.center[i] > aabb.maxDist[i]) distance += (sphere.center[i] - aabb.maxDist[i]) * (sphere.center[i] - aabb.maxDist[i]);
+	}
+	return distance <= sphere.radius * sphere.radius;
 }

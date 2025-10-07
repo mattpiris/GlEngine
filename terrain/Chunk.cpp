@@ -285,6 +285,14 @@ void Chunk::createMesh() {
 	setGlContext();
 }
 
+void Chunk::regenerateMesh() {
+	m_vertexVector.clear();
+	m_positionBuffer.clear();
+	m_normalBuffer.clear();
+	fillBuffers();
+	setGlContext();
+}
+
 void Chunk::reset() {
 	// cleanup
 	m_vertexVector.clear();

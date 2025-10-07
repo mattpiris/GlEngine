@@ -3,6 +3,7 @@
 #include "ResourcesManager.h"
 #include "../core/rendering/BatchRenderer.h"
 #include "../utils/stuff/Log.h"
+#include "../physics/IntersectionTests.h"
 #include <thread>
 
 float cellSize = 1.0f;
@@ -151,4 +152,45 @@ std::optional<Physics::RayCastHit> WorldManager::getNearestTerrainIntersection(P
     }
     
     return bestHit;
+}
+
+void WorldManager::dig(Physics::SphereCollider& brush, float strenght) {
+    for (auto& chunk : m_worldMap) {
+        Physics::AABB aabb = chunk->getAABB();
+        if (!Physics::sphere_intersects_AABB(brush, aabb)) continue;
+
+        // found an actual chunk, check all the points in the chunk and see if the sphere
+        // contains them
+        int gridResolution = pow(2, chunk->getGenerationTicket());
+        int targetSize_x = (chunk->getChunkSize() - 1) / gridResolution;
+        int targetSize_y = (chunk->getChunkHeight() - 1) / gridResolution;
+        
+        for (int x = 0; x < targetSize_x; x++) {
+            for (int y = 0; y < targetSize_y; y++) {
+                for (int z = 0; z < targetSize_x; z++) {
+                    glm::vec3 point = glm::vec3(chunk->getChunkPosition().x, 0, chunk->getChunkPosition().y)
+                        + glm::vec3(x, y, z) * chunk->getCellSize();
+                    
+                    if (!brush.isInside(point)) continue;
+
+                    // else subtract the density noise at the correct point
+                    int index = chunk->getIndex(x, y, z);
+                    auto& densityMap = chunk->getDensityData();
+                   // chunk->m_densityVector[index] -= strenght;
+                   float value = densityMap[index];
+                    // might assign a max value later to clamp density into a max level
+                    //if (value >= 0) {
+                    value -= strenght;
+                    densityMap[index] = value;
+                    //}
+                }
+            }
+        }
+        chunk->regenerateMesh();
+    }
+}
+
+void WorldManager::construct(Physics::SphereCollider& brush, float strenght) {
+    if (strenght < 0) strenght *= -1;
+    dig(brush, -strenght);
 }

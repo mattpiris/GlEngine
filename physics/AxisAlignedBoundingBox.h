@@ -18,6 +18,4 @@ namespace Physics
 
 		AABB(glm::vec3 min, glm::vec3 max) : minDist(min), maxDist(max) {}
 	};
-
-	bool ray_intersects_AABB(RayCast& ray, AABB& aabb);
 }

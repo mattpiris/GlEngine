@@ -23,9 +23,4 @@ namespace Physics
 	private:
 		std::vector<Triangle> m_collisionMesh;
 	};
-
-	// möller trumbore intersection algorithm from wikipedia
-	std::optional<RayCastHit> ray_intersects_triangle(RayCast& ray, Triangle triangle);
-	// returns the nearest intersection point from the raycast
-	std::optional<RayCastHit> ray_intersects_mesh(RayCast& ray, CollisionMesh& mesh);
 }

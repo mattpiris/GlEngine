@@ -60,6 +60,19 @@ void TestScene::render() {
             glm::vec3 cubePos = hit->hitPoint;
             m_debugCube.setPosition(cubePos);
             m_debugCube.draw(projection, view);
+
+            /// terrain modification -> dig / construct
+            // once we have a point 
+            // sphere collider with center in that point
+            ///      - creation of a sphere collider maybe
+            //      - lookup all the chunks that intersect that sphere with bounding boxes    
+            // take all the points in the chunk that intersect that sphere
+            //      - isInside method from sphere collider
+            // subtract noise values from those points
+            // reconstruct mesh with fixed update
+
+            Physics::SphereCollider brush(hit->hitPoint, 2.0f);
+            m_map.dig(brush, 0.1f);
         }
     }
 }

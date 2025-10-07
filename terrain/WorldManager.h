@@ -5,6 +5,7 @@
 #include "Chunk.h"
 #include "../../core/rendering/Model.h"
 #include "../core/rendering/BatchRenderer.h"
+#include "../physics/SphereCollider.h"
 #include "ResourcesManager.h"
 
 
@@ -19,6 +20,13 @@ public:
 	// this function is used by chunk to adjust the stitches near the edge
 	// the position is the chunk position, the direction is the direction the world manager should look at
 	unsigned int getNearChunkLodState(glm::vec2 position, glm::ivec2 direction);
+	
+	// terrain destruction/creation
+	// TODO:: border conditions + optimization for the chunks
+	// it runs at ~30 fps with a brush with radius 2
+	void dig(Physics::SphereCollider& brush, float strenght);
+	void construct(Physics::SphereCollider& brush, float strenght);
+	
 	void TerrainImGui();
 
 	// retrieves the whole map for now, occlusion tests later

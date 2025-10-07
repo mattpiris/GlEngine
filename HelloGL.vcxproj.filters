@@ -446,6 +446,8 @@
     <ClInclude Include="core\Scene.h" />
     <ClInclude Include="scenes\TestScene.h" />
     <ClInclude Include="physics\AxisAlignedBoundingBox.h" />
+    <ClInclude Include="physics\SphereCollider.h" />
+    <ClInclude Include="physics\IntersectionTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Engine.cpp">
@@ -514,10 +516,8 @@
     <ClCompile Include="utils\stuff\ComputeShaderEx.cpp" />
     <ClCompile Include="core\rendering\BatchRenderer.cpp" />
     <ClCompile Include="utils\ComputeShader.cpp" />
-    <ClCompile Include="physics\RayCast.cpp" />
-    <ClCompile Include="physics\CollisionMesh.cpp" />
     <ClCompile Include="scenes\TestScene.cpp" />
-    <ClCompile Include="physics\AxisAlignedBoundingBox.cpp" />
+    <ClCompile Include="physics\IntersectionTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\shaders\BushModelFrag.frag" />
